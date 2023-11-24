@@ -8,22 +8,34 @@ interface CountdownTimerProps {
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate, dateName }) => {
     const calculateTimeRemaining = useCallback(() => {
-        const targetTime = new Date(targetDate).getTime();
-        const currentTime = new Date().getTime();
+        const startDate = new Date(targetDate);
+        const endDate = new Date();
 
-        const timeDifference = currentTime - targetTime;
+        const millisecondsDifference = endDate.getTime() - startDate.getTime();
 
-        const seconds = Math.floor((timeDifference / 1000) % 60);
-        const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
-        const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-        const months = Math.floor(days / 30.44); // assuming an average month length
-        const years = Math.floor(months / 12);
+        const secondsDifference = Math.floor(millisecondsDifference / 1000);
+        const minutesDifference = Math.floor(secondsDifference / 60);
+        const hoursDifference = Math.floor(minutesDifference / 60);
+
+        const startYear = startDate.getFullYear();
+        const endYear = endDate.getFullYear();
+        const startMonth = startDate.getMonth();
+        const endMonth = endDate.getMonth();
+        const startDay = startDate.getDate();
+        const endDay = endDate.getDate();
+
+        const years = endYear - startYear;
+        const months = (endMonth - startMonth + (years * 12)) % 12;
+        const days = endDay - startDay;
+
+        const hours = hoursDifference % 24;
+        const minutes = minutesDifference % 60;
+        const seconds = secondsDifference % 60;
 
         setRemainingTime({
             years,
-            months: months % 12,
-            days: days % 30,
+            months,
+            days,
             hours,
             minutes,
             seconds,
