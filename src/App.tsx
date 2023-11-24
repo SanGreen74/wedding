@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div>
-          <CountdownTimer targetDate="2013-11-08" dateName="нашей первой встречи"/>
+          <CountdownTimer targetDate="2013-11-08" dateName="начала отношений"/>
           <CountdownTimer targetDate="2020-11-08" dateName="нашей свадьбы"/>
         </div>
       </header>

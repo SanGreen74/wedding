@@ -11,7 +11,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate, dateName })
         const targetTime = new Date(targetDate).getTime();
         const currentTime = new Date().getTime();
 
-        const timeDifference = targetTime - currentTime;
+        const timeDifference = currentTime - targetTime;
 
         const seconds = Math.floor((timeDifference / 1000) % 60);
         const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
